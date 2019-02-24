@@ -14,11 +14,12 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This is my new website" />
 <meta property="og:description" content="This is my new website" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<link rel="canonical" href="http://localhost:4000/blog/" />
+<meta property="og:url" content="http://localhost:4000/blog/" />
 <meta property="og:site_name" content="所见省" />
+<link rel="next" href="http://localhost:4000/blog/page2" />
 <script type="application/ld+json">
-{"name":"所见省","description":"This is my new website","@type":"WebSite","url":"http://localhost:4000/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/logo.svg"}},"headline":"Blog","@context":"http://schema.org"}</script>
+{"description":"This is my new website","@type":"WebPage","url":"http://localhost:4000/blog/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/logo.svg"}},"headline":"Blog","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -86,7 +87,7 @@
 
       
 
-      <li class="item  item--nav  item--current">
+      <li class="item  item--nav">
         <a href="/">Home</a>
       </li>
     
@@ -100,7 +101,7 @@
 
       
 
-      <li class="item  item--nav">
+      <li class="item  item--nav  item--current">
         <a href="/blog/">Blog</a>
       </li>
     
@@ -169,10 +170,11 @@ applyToggle('.list--nav', '.button', 640)
     <article class="article  article--page  typeset">
 
       
-        <h1>Blog</h1>
-        <p>There isn’t much going on here yet, but watch this space</p>
-
         
+        <h1>Posts</h1>
+        <p>My thoughts and ideas</p>
+
+
       
 
     </article>
@@ -244,27 +246,21 @@ applyToggle('.list--nav', '.button', 640)
           </article>
         </li>
       
-        <li class="item  item--post">
-          <article class="article  article--post">
-
-            <h2><a href="/hello-rld-hello">Hello World Next</a></h2>
-            
-
-<small class="small  post-meta">
-  
-  
-    
-  &nbsp;&middot;&nbsp;<time datetime="2017-07-22T00:00:00+08:00" class="time">22 Jul 2017</time>
-</small>
-
-            <p>I had this story from one who had no business to tell it to me, or to any other. I may credit the seductive influence of an old vintage upon the narrator for the beginning of it, and my own skeptical incredulity during the days that followed for the balance of the strange tale.</p>
-
-
-
-          </article>
-        </li>
-      
     </ul>
+    <nav class="nav  nav--paginator">
+
+  
+    <span class="pagination  pagination--previous">&larr; Newer</span>
+  
+
+  <span class="pagination  pagination--counter">Page: 1 of 2</span>
+
+  
+    <a href="/blog/page2" class="pagination  pagination--next">Older &rarr;</a>
+  
+
+</nav>
+
   </section>
 
 
