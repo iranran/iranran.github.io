@@ -27,8 +27,10 @@ description: 'This is my new website'
 permalink: /:title
 logo: "/assets/logo.svg"
 
+url: https://blog.sout.vip/
+
 # Pagination
-paginate: 3
+paginate: 8
 paginate_path: blog/page:num
 
 # Header nav
