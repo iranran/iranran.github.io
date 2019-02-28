@@ -109,3 +109,12 @@ getDeclaredMethod(String, Class<?>...)
 代码执行一些在正常情况下不被允许的操作（比如访问私有的属性和方法），所以使用反射可能会导致意料之外的副作用，降低可移植性。
 
 当然也不必过分担心，当反射代码被执行多次后，jvm会把它生成本地代码。
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135360671-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135360671-1');
+</script>

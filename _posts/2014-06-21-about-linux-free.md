@@ -31,3 +31,12 @@ Swap:         4031         40       3991
 参考：
 
 [Linux上的free命令详解](http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html)
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135360671-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135360671-1');
+</script>

@@ -35,3 +35,12 @@ feature_image: "https://picsum.photos/2560/600?image=350"
 ### 主键锁
 - MySQL主键锁并不是事务锁，申请完就释放
 - 对于 insert  into select 这种类型的，要在事务结束后才释放，因为不知道有多少条，申请方式是按次申请，每次条数为  2的(n-1)方，所以可能产生id不连续。
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135360671-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135360671-1');
+</script>

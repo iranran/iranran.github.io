@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-02-28T14:13:44+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">MySQL 碎碎念</title><link href="http://localhost:4000/MySQL-suisuinian" rel="alternate" type="text/html" title="MySQL 碎碎念" /><published>2019-02-10T00:00:00+08:00</published><updated>2019-02-10T00:00:00+08:00</updated><id>http://localhost:4000/MySQL-suisuinian</id><content type="html" xml:base="http://localhost:4000/MySQL-suisuinian">&lt;h3 id=&quot;mysql-mdl读锁&quot;&gt;mysql MDL读锁&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-02-28T14:20:24+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">MySQL 碎碎念</title><link href="http://localhost:4000/MySQL-suisuinian" rel="alternate" type="text/html" title="MySQL 碎碎念" /><published>2019-02-10T00:00:00+08:00</published><updated>2019-02-10T00:00:00+08:00</updated><id>http://localhost:4000/MySQL-suisuinian</id><content type="html" xml:base="http://localhost:4000/MySQL-suisuinian">&lt;h3 id=&quot;mysql-mdl读锁&quot;&gt;mysql MDL读锁&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;MDL锁（metadata lock），用来保护表的元数据信息，主要用于解决或者保证DDL操作与DML操作之间的一致性。&lt;/li&gt;
@@ -59,7 +59,17 @@
 &lt;ul&gt;
   &lt;li&gt;MySQL主键锁并不是事务锁，申请完就释放&lt;/li&gt;
   &lt;li&gt;对于 insert  into select 这种类型的，要在事务结束后才释放，因为不知道有多少条，申请方式是按次申请，每次条数为  2的(n-1)方，所以可能产生id不连续。&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">mysql MDL读锁</summary></entry><entry><title type="html">java反射相关知识</title><link href="http://localhost:4000/about-java-reflection" rel="alternate" type="text/html" title="java反射相关知识" /><published>2015-01-22T00:00:00+08:00</published><updated>2015-01-22T00:00:00+08:00</updated><id>http://localhost:4000/about-java-reflection</id><content type="html" xml:base="http://localhost:4000/about-java-reflection">&lt;p&gt;JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意一个方法和属性。这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。&lt;/p&gt;
+&lt;/ul&gt;
+
+&lt;script async=&quot;&quot; src=&quot;https://www.googletagmanager.com/gtag/js?id=UA-135360671-1&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135360671-1');
+&lt;/script&gt;</content><author><name></name></author><summary type="html">mysql MDL读锁</summary></entry><entry><title type="html">java反射相关知识</title><link href="http://localhost:4000/about-java-reflection" rel="alternate" type="text/html" title="java反射相关知识" /><published>2015-01-22T00:00:00+08:00</published><updated>2015-01-22T00:00:00+08:00</updated><id>http://localhost:4000/about-java-reflection</id><content type="html" xml:base="http://localhost:4000/about-java-reflection">&lt;p&gt;JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意一个方法和属性。这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;涉及到的类&lt;/strong&gt;
@@ -161,7 +171,17 @@ getDeclaredMethod(String, Class&amp;lt;?&amp;gt;...)
 代码执行一些在正常情况下不被允许的操作（比如访问私有的属性和方法），所以使用反射可能会导致意料之外的副作用，降低可移植性。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;当然也不必过分担心，当反射代码被执行多次后，jvm会把它生成本地代码。&lt;/p&gt;</content><author><name></name></author><summary type="html">JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意一个方法和属性。这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</summary></entry><entry><title type="html">Linux上的free命令详解</title><link href="http://localhost:4000/about-linux-free" rel="alternate" type="text/html" title="Linux上的free命令详解" /><published>2014-06-21T00:00:00+08:00</published><updated>2014-06-21T00:00:00+08:00</updated><id>http://localhost:4000/about-linux-free</id><content type="html" xml:base="http://localhost:4000/about-linux-free">&lt;p&gt;本文简要的说明Linux free命令中的buffer和cached是怎么回事。最近闲来无事，在应用服务器上执行了一下 free -m,出来下面的内容。&lt;/p&gt;
+&lt;p&gt;当然也不必过分担心，当反射代码被执行多次后，jvm会把它生成本地代码。&lt;/p&gt;
+
+&lt;script async=&quot;&quot; src=&quot;https://www.googletagmanager.com/gtag/js?id=UA-135360671-1&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135360671-1');
+&lt;/script&gt;</content><author><name></name></author><summary type="html">JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意一个方法和属性。这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</summary></entry><entry><title type="html">Linux上的free命令详解</title><link href="http://localhost:4000/about-linux-free" rel="alternate" type="text/html" title="Linux上的free命令详解" /><published>2014-06-21T00:00:00+08:00</published><updated>2014-06-21T00:00:00+08:00</updated><id>http://localhost:4000/about-linux-free</id><content type="html" xml:base="http://localhost:4000/about-linux-free">&lt;p&gt;本文简要的说明Linux free命令中的buffer和cached是怎么回事。最近闲来无事，在应用服务器上执行了一下 free -m,出来下面的内容。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;free -m
 
@@ -184,4 +204,14 @@ Swap:         4031         40       3991
 
 &lt;p&gt;参考：&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html&quot;&gt;Linux上的free命令详解&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">本文简要的说明Linux free命令中的buffer和cached是怎么回事。最近闲来无事，在应用服务器上执行了一下 free -m,出来下面的内容。</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/coldplayerest/archive/2010/02/20/1669949.html&quot;&gt;Linux上的free命令详解&lt;/a&gt;&lt;/p&gt;
+
+&lt;script async=&quot;&quot; src=&quot;https://www.googletagmanager.com/gtag/js?id=UA-135360671-1&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135360671-1');
+&lt;/script&gt;</content><author><name></name></author><summary type="html">本文简要的说明Linux free命令中的buffer和cached是怎么回事。最近闲来无事，在应用服务器上执行了一下 free -m,出来下面的内容。</summary></entry></feed>
