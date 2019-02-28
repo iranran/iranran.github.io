@@ -9,24 +9,21 @@
 
     
       <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>MySQL 碎碎念 | A Simple Programmer</title>
 <meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Blog" />
+<meta property="og:title" content="MySQL 碎碎念" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="This is my new website" />
-<meta property="og:description" content="This is my new website" />
-<link rel="canonical" href="http://localhost:4000/blog/" />
-<meta property="og:url" content="http://localhost:4000/blog/" />
+<meta name="description" content="mysql MDL读锁" />
+<meta property="og:description" content="mysql MDL读锁" />
+<link rel="canonical" href="http://localhost:4000/MySQL-suisuinian" />
+<meta property="og:url" content="http://localhost:4000/MySQL-suisuinian" />
 <meta property="og:site_name" content="A Simple Programmer" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-02-10T00:00:00+08:00" />
 <script type="application/ld+json">
-{"description":"This is my new website","@type":"WebPage","url":"http://localhost:4000/blog/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/logo.svg"}},"headline":"Blog","@context":"http://schema.org"}</script>
+{"description":"mysql MDL读锁","@type":"BlogPosting","url":"http://localhost:4000/MySQL-suisuinian","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/logo.svg"}},"headline":"MySQL 碎碎念","dateModified":"2019-02-10T00:00:00+08:00","datePublished":"2019-02-10T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/MySQL-suisuinian"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-
-      
-      <title>Posts - A Simple Programmer</title>
-      <meta property="og:title" content="Posts">
-      <meta name="description" content="My Thoughts and Ideas">
-      <meta property="og:description" content="My Thoughts and Ideas">
     
 
     <link rel="manifest" href="/manifest.json">
@@ -44,7 +41,7 @@
 
   </head>
 
-  <body class="layout-blog  blog">
+  <body class="layout-post  mysql-碎碎念">
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="height: 0; position: absolute">
   <symbol id="codepen" viewBox="0 0 16 16"><path d="M15.988 5.443c-.004-.02-.007-.04-.012-.058l-.01-.033c-.006-.017-.012-.034-.02-.05-.003-.012-.01-.023-.014-.034l-.023-.045-.02-.032-.03-.04-.024-.03c-.01-.013-.022-.026-.034-.038l-.027-.027-.04-.032-.03-.024-.012-.01L8.38.117c-.23-.155-.53-.155-.76 0L.305 4.99.296 5c-.012.007-.022.015-.032.023-.014.01-.027.02-.04.032l-.027.027-.034.037-.024.03-.03.04c-.006.012-.013.022-.02.033l-.023.045-.015.034c-.007.016-.012.033-.018.05l-.01.032c-.005.02-.01.038-.012.058l-.006.03C.002 5.5 0 5.53 0 5.56v4.875c0 .03.002.06.006.09l.007.03c.003.02.006.04.013.058l.01.033c.006.018.01.035.018.05l.015.033c.006.016.014.03.023.047l.02.03c.008.016.018.03.03.042.007.01.014.02.023.03.01.012.02.025.034.036.01.01.018.02.028.026l.04.033.03.023.01.01 7.31 4.876c.116.078.248.117.382.116.134 0 .266-.04.38-.116l7.314-4.875.01-.01c.012-.007.022-.015.032-.023.014-.01.027-.02.04-.032l.027-.027.034-.037.024-.03.03-.04.02-.032.023-.046.015-.033.018-.052.01-.033c.005-.02.01-.038.013-.058 0-.01.003-.02.004-.03.004-.03.006-.06.006-.09V5.564c0-.03-.002-.06-.006-.09l-.007-.03zM8 9.626L5.568 8 8 6.374 10.432 8 8 9.626zM7.312 5.18l-2.98 1.993-2.406-1.61 5.386-3.59v3.206zM3.095 8l-1.72 1.15v-2.3L3.095 8zm1.237.828l2.98 1.993v3.208l-5.386-3.59 2.406-1.61zm4.355 1.993l2.98-1.993 2.407 1.61-5.387 3.59v-3.206zM12.905 8l1.72-1.15v2.3L12.905 8zm-1.237-.827L8.688 5.18V1.97l5.386 3.59-2.406 1.61z" fill-rule="nonzero"/></symbol>
   <symbol id="dribbble" viewBox="0 0 16 16"><path d="M8 16c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm6.747-6.905c-.234-.074-2.115-.635-4.257-.292.894 2.456 1.258 4.456 1.328 4.872 1.533-1.037 2.624-2.68 2.93-4.58zM10.67 14.3c-.102-.6-.5-2.688-1.46-5.18l-.044.014C5.312 10.477 3.93 13.15 3.806 13.4c1.158.905 2.614 1.444 4.194 1.444.947 0 1.85-.194 2.67-.543zm-7.747-1.72c.155-.266 2.03-3.37 5.555-4.51.09-.03.18-.056.27-.08-.173-.39-.36-.778-.555-1.16C4.78 7.85 1.47 7.807 1.17 7.8l-.003.208c0 1.755.665 3.358 1.756 4.57zM1.31 6.61c.307.005 3.122.017 6.318-.832-1.132-2.012-2.353-3.705-2.533-3.952-1.912.902-3.34 2.664-3.784 4.785zM6.4 1.368c.188.253 1.43 1.943 2.548 4 2.43-.91 3.46-2.293 3.582-2.468C11.323 1.827 9.736 1.176 8 1.176c-.55 0-1.087.066-1.6.19zm6.89 2.322c-.145.194-1.29 1.662-3.816 2.694.16.325.31.656.453.99.05.117.1.235.147.352 2.274-.286 4.533.172 4.758.22-.015-1.613-.59-3.094-1.543-4.257z"/></symbol>
@@ -136,9 +133,9 @@ applyToggle('.list--nav', '.button', 640)
 
 
 
-  <div class="feature" style="background-image: url(https://picsum.photos/2560/600?image=866)">
+  <div class="feature" style="background-image: url(https://picsum.photos/2560/600?image=350)">
     <div class="container  typeset">
-      <p>Welcome to my blog</p>
+      
 
     </div>
   </div>
@@ -150,29 +147,10 @@ applyToggle('.list--nav', '.button', 640)
 
 <main class="main  container">
 
-  <div class="content">
+  <article class="article  article--post  content  typeset">
 
-    <article class="article  article--page  typeset">
-
-      
-        
-        <h1>Posts</h1>
-        <p>My Thoughts and Ideas</p>
-
-
-      
-
-    </article>
-
+    <h1>MySQL 碎碎念</h1>
     
-  <section class="section  typeset">
-    <ul class="list  list--posts">
-      
-        <li class="item  item--post">
-          <article class="article  article--post">
-
-            <h2><a href="/MySQL-suisuinian">MySQL 碎碎念</a></h2>
-            
 
 <small class="small  post-meta">
   
@@ -183,77 +161,79 @@ applyToggle('.list--nav', '.button', 640)
   &nbsp;&middot;&nbsp;<time datetime="2019-02-10T00:00:00+08:00" class="time">10 Feb 2019</time>
 </small>
 
-            <h3 id="mysql-mdl读锁">mysql MDL读锁</h3>
+    <h3 id="mysql-mdl读锁">mysql MDL读锁</h3>
+
+<ul>
+  <li>MDL锁（metadata lock），用来保护表的元数据信息，主要用于解决或者保证DDL操作与DML操作之间的一致性。</li>
+  <li>sessionA的CRUD会加上MDL读锁，而sessionB的DDL加MDL写锁，要等前面所有的锁释放完才能轮到DDL操作，后面所有此表的操作都会被阻塞。</li>
+  <li><a href="http://www.ywnds.com/?p=7209&amp;viewuser=42">参考文章</a></li>
+</ul>
+
+<h3 id="rr隔离级别下快照时间">RR隔离级别下快照时间</h3>
+<ul>
+  <li>RR隔离级别下，事务执行过程中当遇到第一个普通读后，整个事务就开始使用当前最新的快照，这个快照是针对所有的表，而不是你读操作的表</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th style="text-align: right">事务A</th>
+      <th style="text-align: right">事务B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td style="text-align: right">select * from A</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: right"> </td>
+      <td style="text-align: right">update B set b=5 where id = 6</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: right">select * from B where id = 6</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align: right">select * from B where id = 6</td>
+      <td style="text-align: right"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>事务A中第3步读到的数据仍然是B更新前的数据</li>
+  <li>事务A中第4步由于是当前读所以可以读到最新数据</li>
+</ul>
+
+<h3 id="当前读与幻读">当前读与幻读</h3>
+<ul>
+  <li>MySQL当前读(如for update等)在RR隔离级别下也会读到其它事务提交的数据，所以可能产生幻读。</li>
+  <li>普通读由于读取的都是快照数据，所以不会产生幻读的情况</li>
+  <li><a href="https://www.cnblogs.com/renolei/p/5910060.html">参考文章</a></li>
+</ul>
+
+<h3 id="主键锁">主键锁</h3>
+<ul>
+  <li>MySQL主键锁并不是事务锁，申请完就释放</li>
+  <li>对于 insert  into select 这种类型的，要在事务结束后才释放，因为不知道有多少条，申请方式是按次申请，每次条数为  2的(n-1)方，所以可能产生id不连续。</li>
+</ul>
 
 
-
-          </article>
-        </li>
-      
-        <li class="item  item--post">
-          <article class="article  article--post">
-
-            <h2><a href="/about-java-reflection">java反射相关知识</a></h2>
-            
-
-<small class="small  post-meta">
+    <div class="share">
   
-  
+</div>
+
+
     
-      <span class="label  label--category"><a href="/categories/#java基础知识">Java基础知识</a></span>
-    
-  &nbsp;&middot;&nbsp;<time datetime="2015-01-22T00:00:00+08:00" class="time">22 Jan 2015</time>
-</small>
-
-            <p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意一个方法和属性。这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
 
 
-
-          </article>
-        </li>
-      
-        <li class="item  item--post">
-          <article class="article  article--post">
-
-            <h2><a href="/about-linux-free">Linux上的free命令详解</a></h2>
-            
-
-<small class="small  post-meta">
-  
-  
-    
-      <span class="label  label--category"><a href="/categories/#linux">Linux</a></span>
-    
-  &nbsp;&middot;&nbsp;<time datetime="2014-06-21T00:00:00+08:00" class="time">21 Jun 2014</time>
-</small>
-
-            <p>本文简要的说明Linux free命令中的buffer和cached是怎么回事。最近闲来无事，在应用服务器上执行了一下 free -m,出来下面的内容。</p>
-
-
-
-          </article>
-        </li>
-      
-    </ul>
-    <nav class="nav  nav--paginator">
-
-  
-    <span class="pagination  pagination--previous">&larr; Newer</span>
-  
-
-  <span class="pagination  pagination--counter">Page: 1 of 1</span>
-
-  
-    <span class="pagination  pagination--next">Older &rarr;</span>
-  
-
-</nav>
-
-  </section>
-
-
-
-  </div>
+  </article>
 
   
 
