@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ArrayList线程安全引起数组越界问题
-categories:
+category:
 - Java基础知识
 - 线程安全
 feature_image: "https://picsum.photos/2560/600?image=770"

@@ -27,7 +27,7 @@ description: 'This is my new website'
 permalink: /:title
 logo: "/assets/logo.svg"
 
-url: https://blog.sout.vip/
+url: https://sout.vip/
 
 # Pagination
 paginate: 8
@@ -48,5 +48,5 @@ collections:
     output: true
     description: "My Thoughts and Ideas"
     feature_text: |
-      Welcome to my blog
+      My Thoughts and Ideas
     feature_image: "https://picsum.photos/2560/600?image=866"
