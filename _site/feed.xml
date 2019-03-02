@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-02-28T14:20:24+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">MySQL 碎碎念</title><link href="http://localhost:4000/MySQL-suisuinian" rel="alternate" type="text/html" title="MySQL 碎碎念" /><published>2019-02-10T00:00:00+08:00</published><updated>2019-02-10T00:00:00+08:00</updated><id>http://localhost:4000/MySQL-suisuinian</id><content type="html" xml:base="http://localhost:4000/MySQL-suisuinian">&lt;h3 id=&quot;mysql-mdl读锁&quot;&gt;mysql MDL读锁&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-02T20:23:52+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">MySQL 碎碎念</title><link href="http://localhost:4000/MySQL-suisuinian" rel="alternate" type="text/html" title="MySQL 碎碎念" /><published>2019-02-10T00:00:00+08:00</published><updated>2019-02-10T00:00:00+08:00</updated><id>http://localhost:4000/MySQL-suisuinian</id><content type="html" xml:base="http://localhost:4000/MySQL-suisuinian">&lt;h3 id=&quot;mysql-mdl读锁&quot;&gt;mysql MDL读锁&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;MDL锁（metadata lock），用来保护表的元数据信息，主要用于解决或者保证DDL操作与DML操作之间的一致性。&lt;/li&gt;
@@ -69,7 +69,100 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-135360671-1');
-&lt;/script&gt;</content><author><name></name></author><summary type="html">mysql MDL读锁</summary></entry><entry><title type="html">java反射相关知识</title><link href="http://localhost:4000/about-java-reflection" rel="alternate" type="text/html" title="java反射相关知识" /><published>2015-01-22T00:00:00+08:00</published><updated>2015-01-22T00:00:00+08:00</updated><id>http://localhost:4000/about-java-reflection</id><content type="html" xml:base="http://localhost:4000/about-java-reflection">&lt;p&gt;JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意一个方法和属性。这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。&lt;/p&gt;
+&lt;/script&gt;</content><author><name></name></author><summary type="html">mysql MDL读锁</summary></entry><entry><title type="html">ArrayList线程安全引起数组越界问题</title><link href="http://localhost:4000/arraylist-threadsafe-ArrayIndexOutOfBoundsException" rel="alternate" type="text/html" title="ArrayList线程安全引起数组越界问题" /><published>2016-04-22T00:00:00+08:00</published><updated>2016-04-22T00:00:00+08:00</updated><id>http://localhost:4000/arraylist-threadsafe-ArrayIndexOutOfBoundsException</id><content type="html" xml:base="http://localhost:4000/arraylist-threadsafe-ArrayIndexOutOfBoundsException">&lt;p&gt;ArrayList不是线程安全的，那么如果用在多线程中会出现什么问题呢，下面的问题是在工作中踩的一个坑。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;&amp;gt;();
+  stocklist.stream().forEach(stock-&amp;gt;{
+    ticket = api.getTicket(stock);
+    list.add(ticket);
+  });
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;某天同事觉得这段代码跑得有点慢，就把stream换成parallelStream,结果就报如下错误：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Exception in thread &quot;Thread-1&quot; Exception in thread &quot;Thread-2&quot; java.lang.ArrayIndexOutOfBoundsException: 15
+     at java.util.ArrayList.elementData(ArrayList.java:418)
+     at java.util.ArrayList.get(ArrayList.java:431)
+     at java.lang.Thread.run(Thread.java:745)
+ java.lang.ArrayIndexOutOfBoundsException: 15
+     at java.util.ArrayList.add(ArrayList.java:459)
+     at java.lang.Thread.run(Thread.java:745)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;分析&quot;&gt;分析：&lt;/h3&gt;
+
+&lt;p&gt;ArrayList是基于数组实现的，数组长度是固定的，当元素达到数组上限时容量就要自动增长。
+add实现方法如下，首先检查数组长度是否可以再添加一个元素，如果不满足就扩容后添加此元素，然后再复制数组。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    public boolean add(E e) {
+        ensureCapacityInternal(size + 1); 
+        elementData[size++] = e; //数组赋值
+        return true;
+    }
+    
+    private void ensureExplicitCapacity(int minCapacity) {
+            modCount++;
+    
+            // overflow-conscious code
+            if (minCapacity - elementData.length &amp;gt; 0)
+                grow(minCapacity);
+        }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;由于ArrayList是线程不安全的，假设当前数组容量是15，当前size=14&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;序号&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;线程1&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;线程2&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;add&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;add&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;数组赋值 elementData[14]=e&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;数组赋值 elementData[15]=e&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;ArrayIndexOutOfBoundsException&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;可以看到第1步线程1和2都认为不需要扩容，线程1先执行add这时size=15数组已满无法再添加元素，而线程2执行第三步时自然就越界了。&lt;/p&gt;
+
+&lt;h3 id=&quot;解决办法&quot;&gt;解决办法&lt;/h3&gt;
+
+&lt;p&gt;明白问题所在，解决办法就好弄了&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;list.add(ticket); 加上锁&lt;/li&gt;
+  &lt;li&gt;把ArrayList换成CopyOnWriteArrayList&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script async=&quot;&quot; src=&quot;https://www.googletagmanager.com/gtag/js?id=UA-135360671-1&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135360671-1');
+&lt;/script&gt;</content><author><name></name></author><summary type="html">ArrayList不是线程安全的，那么如果用在多线程中会出现什么问题呢，下面的问题是在工作中踩的一个坑。</summary></entry><entry><title type="html">java反射相关知识</title><link href="http://localhost:4000/about-java-reflection" rel="alternate" type="text/html" title="java反射相关知识" /><published>2015-01-22T00:00:00+08:00</published><updated>2015-01-22T00:00:00+08:00</updated><id>http://localhost:4000/about-java-reflection</id><content type="html" xml:base="http://localhost:4000/about-java-reflection">&lt;p&gt;JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意一个方法和属性。这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;涉及到的类&lt;/strong&gt;
