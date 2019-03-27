@@ -1,8 +1,8 @@
-const version = '20190327133051';
+const version = '20190327133424';
 const cacheName = `static::${version}`;
 
 const buildContentBlob = () => {
-  return ["/distribute-transaction-sync","/MySQL-suisuinian","/arraylist-threadsafe-ArrayIndexOutOfBoundsException","/about-java-reflection","/about-linux-free","/about","/categories","/blog/","/","/manifest.json","/assets/search.json","/assets/styles.css","/redirects.json","/sitemap.xml","/robots.txt","/feed.xml","/assets/logo.svg", "/assets/default-offline-image.png", "/assets/scripts/fetch.js"
+  return ["/distribute-transaction-sync","/MySQL-suisuinian","/arraylist-threadsafe-ArrayIndexOutOfBoundsException","/about-java-reflection","/about-linux-free","/about","/categories","/blog/","/","/manifest.json","/assets/search.json","/assets/styles.css","/redirects.json","/sitemap.xml","/robots.txt","/feed.xml","/assets/logos/logo.svg", "/assets/default-offline-image.png", "/assets/scripts/fetch.js"
   ]
 }
 

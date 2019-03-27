@@ -25,7 +25,7 @@ baseurl: ''
 title: 'A Simple Programmer'
 description: 'This is my new website'
 permalink: /:title
-logo: "/assets/logo.svg"
+logo: "/assets/logos/logo.svg"
 
 url: https://sout.vip/
 
