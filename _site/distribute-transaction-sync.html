@@ -235,6 +235,11 @@ applyToggle('.list--nav', '.button', 640)
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Caller</span><span class="o">{</span>
     
     <span class="c1">//do schedule</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scedule</span><span class="o">(){</span>
+        <span class="n">list</span> <span class="o">=</span> <span class="n">selectUndoneTask</span><span class="o">();</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">foreach</span><span class="o">(</span><span class="n">doProcess</span><span class="o">(</span><span class="n">processStep</span><span class="o">));</span>
+    <span class="o">}</span>
+    
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doProcess</span><span class="o">(</span><span class="n">ProcessStep</span> <span class="n">processStep</span><span class="o">){</span>
             
             <span class="n">ProcessService</span> <span class="n">service</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProcessService</span><span class="o">();</span>
@@ -264,6 +269,14 @@ applyToggle('.list--nav', '.button', 640)
 <span class="o">}</span>
 
 </code></pre></div></div>
+
+<h4 id="执行过程">执行过程</h4>
+<ul>
+  <li>任务创建时先入tb_process_step表，此时step=0</li>
+  <li>执行Caller.doProcess，此时执行的是一条任务链，每执行完一步更新一次step，最后一步置成100终结</li>
+  <li>如果中间步骤失败，退出执行</li>
+  <li>scedule 是一个定时1min钟一次，查找未完成的任务，断续执行，记录retrytimes,如果超过阈值则发告警，技术介入处理</li>
+</ul>
 
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-135360671-1"></script>
 

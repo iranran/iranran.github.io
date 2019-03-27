@@ -82,6 +82,11 @@ public class ProcessService{
 public class Caller{
     
     //do schedule
+    public void scedule(){
+        list = selectUndoneTask();
+        list.foreach(doProcess(processStep));
+    }
+    
     public void doProcess(ProcessStep processStep){
             
             ProcessService service = new ProcessService();
@@ -112,6 +117,11 @@ public class Caller{
 
 ```
 
+#### 执行过程
+* 任务创建时先入tb_process_step表，此时step=0
+* 执行Caller.doProcess，此时执行的是一条任务链，每执行完一步更新一次step，最后一步置成100终结
+* 如果中间步骤失败，退出执行
+* scedule 是一个定时1min钟一次，查找未完成的任务，断续执行，记录retrytimes,如果超过阈值则发告警，技术介入处理
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135360671-1"></script>
 <script>

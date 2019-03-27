@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-26T10:02:21+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">同步的分步式事务</title><link href="http://localhost:4000/distribute-transaction-sync" rel="alternate" type="text/html" title="同步的分步式事务" /><published>2019-03-25T00:00:00+08:00</published><updated>2019-03-25T00:00:00+08:00</updated><id>http://localhost:4000/distribute-transaction-sync</id><content type="html" xml:base="http://localhost:4000/distribute-transaction-sync">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-27T13:29:00+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">同步的分步式事务</title><link href="http://localhost:4000/distribute-transaction-sync" rel="alternate" type="text/html" title="同步的分步式事务" /><published>2019-03-25T00:00:00+08:00</published><updated>2019-03-25T00:00:00+08:00</updated><id>http://localhost:4000/distribute-transaction-sync</id><content type="html" xml:base="http://localhost:4000/distribute-transaction-sync">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
 &lt;p&gt;业务需要在后台管理界面创建一类特殊账户，将在多个系统插入记录，要保证所有环节都通过才算成功。
 正常情况下都可以成功，但是也可能由于重启等原因不能进行下去，多个调用有一些需要串行，即后面的请求要依赖前面的结果。&lt;/p&gt;
 
@@ -69,6 +69,11 @@
 &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Caller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
     
     &lt;span class=&quot;c1&quot;&gt;//do schedule&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scedule&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectUndoneTask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;foreach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;doProcess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;processStep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
     &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doProcess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ProcessStep&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;processStep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
             
             &lt;span class=&quot;n&quot;&gt;ProcessService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ProcessService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
@@ -98,6 +103,14 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;执行过程&quot;&gt;执行过程&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;任务创建时先入tb_process_step表，此时step=0&lt;/li&gt;
+  &lt;li&gt;执行Caller.doProcess，此时执行的是一条任务链，每执行完一步更新一次step，最后一步置成100终结&lt;/li&gt;
+  &lt;li&gt;如果中间步骤失败，退出执行&lt;/li&gt;
+  &lt;li&gt;scedule 是一个定时1min钟一次，查找未完成的任务，断续执行，记录retrytimes,如果超过阈值则发告警，技术介入处理&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;script async=&quot;&quot; src=&quot;https://www.googletagmanager.com/gtag/js?id=UA-135360671-1&quot;&gt;&lt;/script&gt;
 
