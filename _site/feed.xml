@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-27T13:34:24+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">同步的分步式事务</title><link href="http://localhost:4000/distribute-transaction-sync" rel="alternate" type="text/html" title="同步的分步式事务" /><published>2019-03-25T00:00:00+08:00</published><updated>2019-03-25T00:00:00+08:00</updated><id>http://localhost:4000/distribute-transaction-sync</id><content type="html" xml:base="http://localhost:4000/distribute-transaction-sync">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-27T14:00:46+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">同步的分步式事务</title><link href="http://localhost:4000/distribute-transaction-sync" rel="alternate" type="text/html" title="同步的分步式事务" /><published>2019-03-25T00:00:00+08:00</published><updated>2019-03-25T00:00:00+08:00</updated><id>http://localhost:4000/distribute-transaction-sync</id><content type="html" xml:base="http://localhost:4000/distribute-transaction-sync">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
 &lt;p&gt;业务需要在后台管理界面创建一类特殊账户，将在多个系统插入记录，要保证所有环节都通过才算成功。
 正常情况下都可以成功，但是也可能由于重启等原因不能进行下去，多个调用有一些需要串行，即后面的请求要依赖前面的结果。&lt;/p&gt;
 
@@ -191,7 +191,38 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-135360671-1');
-&lt;/script&gt;</content><author><name></name></author><summary type="html">mysql MDL读锁</summary></entry><entry><title type="html">ArrayList线程安全引起数组越界问题</title><link href="http://localhost:4000/arraylist-threadsafe-ArrayIndexOutOfBoundsException" rel="alternate" type="text/html" title="ArrayList线程安全引起数组越界问题" /><published>2016-04-22T00:00:00+08:00</published><updated>2016-04-22T00:00:00+08:00</updated><id>http://localhost:4000/arraylist-threadsafe-ArrayIndexOutOfBoundsException</id><content type="html" xml:base="http://localhost:4000/arraylist-threadsafe-ArrayIndexOutOfBoundsException">&lt;p&gt;ArrayList不是线程安全的，那么如果用在多线程中会出现什么问题呢，下面的问题是在工作中踩的一个坑。&lt;/p&gt;
+&lt;/script&gt;</content><author><name></name></author><summary type="html">mysql MDL读锁</summary></entry><entry><title type="html">delete真的要加where</title><link href="http://localhost:4000/delete-data-without-where" rel="alternate" type="text/html" title="delete真的要加where" /><published>2017-03-25T00:00:00+08:00</published><updated>2017-03-25T00:00:00+08:00</updated><id>http://localhost:4000/delete-data-without-where</id><content type="html" xml:base="http://localhost:4000/delete-data-without-where">&lt;p&gt;经历过两次delete删数据没加条件的事故&lt;/p&gt;
+
+&lt;h3 id=&quot;事故1&quot;&gt;事故1&lt;/h3&gt;
+
+&lt;p&gt;执行delete时没加任何条件，这个是前同事搞的。下班路上接到电话问把数据全删除了怎么办，还好当时是用的腾讯云，数据库每天都有备份，直接找到对应的表把sql下载下来重新执行一次。另外也得意于那张表是个量化使用的历史统计表，只有夜里执行一次，不会产生实时数据。&lt;/p&gt;
+
+&lt;p&gt;后来dba把sql_safe_updates加上了，sql_safe_updates参数对不带where条件的update/delete语句进行限制无法执行，这个参数设置后，可以防止误操作把整个表都更新或者删除。&lt;/p&gt;
+
+&lt;h3 id=&quot;事故2&quot;&gt;事故2&lt;/h3&gt;
+
+&lt;p&gt;这个是自己弄出来的，当时脑袋有点迷糊，第一次插入的时候数据有误，心想着删除就可以了，执行了下面的sql语句&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tb_common_config&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7017&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;执行完就想起来换了，7017不只有我插入的数据，还有之前客户的其它配置。找DBA说没有binlog，要恢复得几个小时，让自己搞实在弄不出来再进行恢复。&lt;/p&gt;
+
+&lt;p&gt;还好这些操作都是后台管理的数据，数据操作都有日志存储在数据库中，找到最新的操作记录，手动给插入回去问题解决，但还是吓了一大跳。&lt;/p&gt;
+
+&lt;h3 id=&quot;解决方案&quot;&gt;解决方案&lt;/h3&gt;
+
+&lt;p&gt;针对线上的update delete都要加where，另外操作前也要用select查出来，最好写操作的条件只是id，这样可以有效防止误伤。&lt;/p&gt;
+
+&lt;script async=&quot;&quot; src=&quot;https://www.googletagmanager.com/gtag/js?id=UA-135360671-1&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135360671-1');
+&lt;/script&gt;</content><author><name></name></author><summary type="html">经历过两次delete删数据没加条件的事故</summary></entry><entry><title type="html">ArrayList线程安全引起数组越界问题</title><link href="http://localhost:4000/arraylist-threadsafe-ArrayIndexOutOfBoundsException" rel="alternate" type="text/html" title="ArrayList线程安全引起数组越界问题" /><published>2016-04-22T00:00:00+08:00</published><updated>2016-04-22T00:00:00+08:00</updated><id>http://localhost:4000/arraylist-threadsafe-ArrayIndexOutOfBoundsException</id><content type="html" xml:base="http://localhost:4000/arraylist-threadsafe-ArrayIndexOutOfBoundsException">&lt;p&gt;ArrayList不是线程安全的，那么如果用在多线程中会出现什么问题呢，下面的问题是在工作中踩的一个坑。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;&amp;gt;();
   stocklist.stream().forEach(stock-&amp;gt;{
