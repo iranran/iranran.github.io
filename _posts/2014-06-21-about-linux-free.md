@@ -25,7 +25,8 @@ Swap:         4031         40       3991
 * -/+ buffers/cache: 这个是实际使用的内存值
 * A buffer is something that has yet to be "written" to disk. 
 * A cache is something that has been "read" from the disk and stored for later use.
-* buffer是用于存放要输出到disk（块设备）的数据的，而cache是存放从disk上读出的数据。这二者是为了提高IO性能的,弥补快速的内存和磁盘之间的速度差。
+* buffer是用于存放要输出到disk（块设备）的数据的，而cache是存放从disk上读出的数据。
+* 这二者都是为了提高IO性能的,弥补快速的内存和磁盘之间的速度差。操作系统会尽量使用内存的缓存，所以大部分时间free都很小。
 * 当内存空间不够用的时候，会从buffer、cached中再拿回来，给对应的进程使用。
 
 参考：

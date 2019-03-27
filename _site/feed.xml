@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-27T14:00:46+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">同步的分步式事务</title><link href="http://localhost:4000/distribute-transaction-sync" rel="alternate" type="text/html" title="同步的分步式事务" /><published>2019-03-25T00:00:00+08:00</published><updated>2019-03-25T00:00:00+08:00</updated><id>http://localhost:4000/distribute-transaction-sync</id><content type="html" xml:base="http://localhost:4000/distribute-transaction-sync">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-03-27T19:22:17+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">A Simple Programmer</title><subtitle>This is my new website</subtitle><entry><title type="html">同步的分步式事务</title><link href="http://localhost:4000/distribute-transaction-sync" rel="alternate" type="text/html" title="同步的分步式事务" /><published>2019-03-25T00:00:00+08:00</published><updated>2019-03-25T00:00:00+08:00</updated><id>http://localhost:4000/distribute-transaction-sync</id><content type="html" xml:base="http://localhost:4000/distribute-transaction-sync">&lt;h3 id=&quot;背景&quot;&gt;背景&lt;/h3&gt;
 &lt;p&gt;业务需要在后台管理界面创建一类特殊账户，将在多个系统插入记录，要保证所有环节都通过才算成功。
 正常情况下都可以成功，但是也可能由于重启等原因不能进行下去，多个调用有一些需要串行，即后面的请求要依赖前面的结果。&lt;/p&gt;
 
@@ -444,7 +444,8 @@ Swap:         4031         40       3991
   &lt;li&gt;-/+ buffers/cache: 这个是实际使用的内存值&lt;/li&gt;
   &lt;li&gt;A buffer is something that has yet to be “written” to disk.&lt;/li&gt;
   &lt;li&gt;A cache is something that has been “read” from the disk and stored for later use.&lt;/li&gt;
-  &lt;li&gt;buffer是用于存放要输出到disk（块设备）的数据的，而cache是存放从disk上读出的数据。这二者是为了提高IO性能的,弥补快速的内存和磁盘之间的速度差。&lt;/li&gt;
+  &lt;li&gt;buffer是用于存放要输出到disk（块设备）的数据的，而cache是存放从disk上读出的数据。&lt;/li&gt;
+  &lt;li&gt;这二者都是为了提高IO性能的,弥补快速的内存和磁盘之间的速度差。操作系统会尽量使用内存的缓存，所以大部分时间free都很小。&lt;/li&gt;
   &lt;li&gt;当内存空间不够用的时候，会从buffer、cached中再拿回来，给对应的进程使用。&lt;/li&gt;
 &lt;/ul&gt;
 
